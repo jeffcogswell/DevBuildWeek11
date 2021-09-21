@@ -28,6 +28,18 @@ namespace CoffeeAdmin.Controllers
 			return View();
 		}
 
+		public IActionResult login(string username)
+		{
+			DAL.CurrentUser = username;
+			return Redirect("/");
+		}
+
+		public IActionResult logout()
+		{
+			DAL.CurrentUser = null;
+			return Redirect("/");
+		}
+
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{

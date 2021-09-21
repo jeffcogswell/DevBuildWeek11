@@ -15,5 +15,6 @@ namespace CoffeeAdmin.Models
 		public string description { get; set; }
 		public decimal price { get; set; }
 		public string categoryId { get; set; }
+		public string username { get; set; }
 	}
 }

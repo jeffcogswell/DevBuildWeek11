@@ -24,7 +24,31 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Admin</a>
+                        </li>
+
+                        @* User is logged in *@
+                        @if (DAL.CurrentUser != null)
+                        {
+                            <li class="nav-item">
+                                Welcome @DAL.CurrentUser
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+
                     </ul>
+                    @* User is not logged in, so offer login form *@
+                    @if (DAL.CurrentUser == null)
+                    {
+                        <form class="navbar-form" method="post" action="/home/login">
+                            <input type="text" name="username" />
+                            <input type="submit" value="Login" />
+                        </form>
+                    }
                 </div>
             </div>
         </nav>

@@ -30,5 +30,25 @@ namespace CoffeeAdmin.Controllers
 			//return RedirectToAction()
 			return Redirect($"/Product/ListProducts?catid={prod.categoryId}");
 		}
+
+		public IActionResult DecreasePrice(int prodid)
+		{
+			Product prod = DAL.GetProduct(prodid);
+			prod.price = prod.price - 1;
+			DAL.UpdateProduct(prod);
+			return Redirect($"/Product/ListProducts?catid={prod.categoryId}");
+		}
+
+		public IActionResult test()
+		{
+			HttpContext.Response.Headers.Add("content-type", "text/html");
+			return Content("Hello <b>from</b> test");
+		}
+
+		public IActionResult Search(string str)
+		{
+			List<Product> prods = DAL.SearchProduct(str);
+			return View(prods);
+		}
 	}
 }

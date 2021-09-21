@@ -7,10 +7,11 @@
 
 @foreach (Product prod in Model.prods)
 {
-    <div>
-        @prod.id @prod.name @prod.description @prod.price
-        <a asp-action="Delete" asp-route-prodid="@prod.id" class="btn btn-danger">Delete</a>
-        <a asp-action="Edit" asp-route-prodid="@prod.id" class="btn btn-secondary">Edit</a>
-        <a asp-action="IncreasePrice" asp-route-prodid="@prod.id" class="btn btn-primary">Increase Price</a>
-    </div>
+<div>
+    @prod.id @prod.name @prod.description @prod.price
+    <a asp-action="Delete" asp-route-prodid="@prod.id" class="btn btn-danger">Delete</a>
+    <a asp-action="Edit" asp-route-prodid="@prod.id" class="btn btn-secondary">Edit</a>
+    <a asp-action="IncreasePrice" asp-route-prodid="@prod.id" class="btn btn-primary">Increase Price</a>
+    <a asp-action="DecreasePrice" asp-route-prodid="@prod.id" class="btn btn-primary">Decrease Price</a>
+</div>
 }
