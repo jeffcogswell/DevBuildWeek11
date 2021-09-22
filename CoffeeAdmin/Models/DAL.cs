@@ -11,7 +11,7 @@ namespace CoffeeAdmin.Models
 	public class DAL
 	{
 		public static string CurrentUser = null;
-		public static MySqlConnection DB = new MySqlConnection("Server=localhost;Database=morecoffee;Uid=root;Password=abc123");
+		public static MySqlConnection DB;
 
 		// Category Table
 
