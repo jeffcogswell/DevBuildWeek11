@@ -39,12 +39,34 @@ namespace CoffeeAdmin.Models
 		// Do we even need this one? Yeah probably
 		public static void UpdateCategory(Category cat)
 		{
-			//
-			// Category { id = "COFF", description = "New description" }
-			//
-			//
-			cat.username = DAL.CurrentUser;
-			DB.Update(cat);
+			// This is tricky: We want to verify that the username matches
+			// what's in the database table for this category, and NOT just
+			// check the category object we were passed in (which will normally
+			// be empty anyway!). So we still need to do a lookup
+			// of the very same category the user is editing and make sure
+			// the user has access.
+			// Then: Use *that* username to populate the 
+			// item we're saving, because we're not actually using the
+			// username in the form itself, and so it's currently empty.
+
+			Category testcat = DAL.GetCategory(cat.id);
+
+			if (testcat != null && (DAL.CurrentUser == "admin" || DAL.CurrentUser == testcat.username))
+			{
+				cat.username = testcat.username;
+				DB.Update(cat);
+			}
+			// This is a situation where we should actually decide how to deal with an error like this.
+			// Do we send an error back to the user if they don't have rights to do this?
+			// One thing to consider is that normally our user shouldn't end up in this
+			// function if they don't have rights. We've disabled the buttons for editing
+			// categories they don't have rights to. So really the only time somebody
+			// should end up here is if there's a bug in our code (hopefully not) or if
+			// somebody broke into the system. In the case of somebody breaking in, we
+			// do NOT want to give them ANY information. So we won't tell them, "Sorry
+			// you don't have rights to do that." Instead we will say NOTHING. So my
+			// usual best practice for this case is to just not return any error in an
+			// "else" block.
 		} 
 
 		// "D" Delete from category table

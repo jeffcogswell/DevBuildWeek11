@@ -1,0 +1,24 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "EditCategoryForm";
+}
+
+<h1>Edit Category</h1>
+
+@if (Model == null)
+{
+    <div>Sorry, that category does not exist.</div>
+    <a href="/category" class="btn btn-danger">Go Back</a>
+}
+else
+{
+    <i>Note: You cannot change the ID. To do that, you'll need to delete this category and then create a new one with the changed ID.</i>
+    <form method="post" action="/Category/UpdateCategory">
+        ID (must be four uppercase letters): <input readonly="readonly" type="text" name="id" value="@Model.id" /><br />
+        Name: <input class="form-control" type="text" name="name" value="@Model.name" /><br />
+        Description: <input class="form-control" type="text" name="description" value="@Model.description" /><br />
+        <input type="submit" value="Save" />
+    </form>
+    <br />
+    <a href="/category" class="btn btn-danger">Cancel</a>
+}

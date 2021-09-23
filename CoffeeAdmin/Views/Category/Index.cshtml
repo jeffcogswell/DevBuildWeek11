@@ -30,12 +30,15 @@
                 <td>@cat.name</td>
                 <td>@cat.description</td>
                 <td>
-                    <a asp-action="DeleteCategory" asp-route-catid="@cat.id" class="btn btn-danger">Delete</a>
-                    <a asp-action="EditCategory" asp-route-catid="@cat.id" class="btn btn-secondary">Edit</a>
                     <a asp-controller="Product" asp-action="ListProducts" asp-route-catid="@cat.id" class="btn btn-primary">Products</a>
+                    @if (DAL.CurrentUser == "admin" || DAL.CurrentUser == cat.username)
+                    {
+                    <a asp-action="DeleteCategory" asp-route-catid="@cat.id" class="btn btn-danger">Delete</a>
+                    <a asp-action="EditCategoryForm" asp-route-catid="@cat.id" class="btn btn-secondary">Edit</a>
+                    }
                 </td>
             </tr>
 		}
     </tbody>
 </table>
-<a asp-action="NewCategory" class="btn btn-primary">New</a>
+<a asp-action="AddCategoryForm" class="btn btn-primary">New</a>

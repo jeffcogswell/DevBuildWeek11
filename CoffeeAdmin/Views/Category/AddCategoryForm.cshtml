@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "AddCategoryForm";
+}
+
+<h1>Add New Category</h1>
+
+<form method="post" action="/Category/SaveCategory">
+    ID (must be four uppercase letters): <input class="form-control" type="text" name="id" /><br />
+    Name: <input class="form-control" type="text" name="name" /><br />
+    Description: <input class="form-control" type="text" name="description" /><br />
+    <input type="submit" value="Save" />
+</form>
